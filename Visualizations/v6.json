@@ -1,0 +1,85 @@
+ 
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "query_string": {
+          "query": "*GET OR http",
+          "analyze_wildcard": true
+        }
+      },
+      "filter": {
+        "bool": {
+          "must": [
+            {
+              "query": {
+                "query_string": {
+                  "query": "*",
+                  "analyze_wildcard": true
+                }
+              }
+            },
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": 1437642835670,
+                  "lte": 1437644635670
+                }
+              }
+            }
+          ],
+          "must_not": []
+        }
+      }
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "2": {
+      "filters": {
+        "filters": {
+          "*termi8": {
+            "query": {
+              "query_string": {
+                "query": "*termi8",
+                "analyze_wildcard": true
+              }
+            }
+          },
+          "*termi9": {
+            "query": {
+              "query_string": {
+                "query": "*termi9",
+                "analyze_wildcard": true
+              }
+            }
+          },
+          "*termi10": {
+            "query": {
+              "query_string": {
+                "query": "*termi10",
+                "analyze_wildcard": true
+              }
+            }
+          },
+          "*termi11": {
+            "query": {
+              "query_string": {
+                "query": "*termi11",
+                "analyze_wildcard": true
+              }
+            }
+          },
+          "*termi12": {
+            "query": {
+              "query_string": {
+                "query": "*termi12",
+                "analyze_wildcard": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

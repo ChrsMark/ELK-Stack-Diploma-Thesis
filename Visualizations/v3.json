@@ -1,0 +1,92 @@
+ 
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "query_string": {
+          "query": "*",
+          "analyze_wildcard": true
+        }
+      },
+      "filter": {
+        "bool": {
+          "must": [
+            {
+              "query": {
+                "query_string": {
+                  "query": "*",
+                  "analyze_wildcard": true
+                }
+              }
+            },
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": 1437642835670,
+                  "lte": 1437644635670
+                }
+              }
+            }
+          ],
+          "must_not": []
+        }
+      }
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "2": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "interval": "30s",
+        "pre_zone": "+03:00",
+        "pre_zone_adjust_large_interval": true,
+        "min_doc_count": 1,
+        "extended_bounds": {
+          "min": 1437642835659,
+          "max": 1437644635659
+        }
+      },
+      "aggs": {
+        "3": {
+          "filters": {
+            "filters": {
+              "*WARNING": {
+                "query": {
+                  "query_string": {
+                    "query": "*WARNING",
+                    "analyze_wildcard": true
+                  }
+                }
+              },
+              "*ERROR": {
+                "query": {
+                  "query_string": {
+                    "query": "*ERROR",
+                    "analyze_wildcard": true
+                  }
+                }
+              },
+              "*AUDIT": {
+                "query": {
+                  "query_string": {
+                    "query": "*AUDIT",
+                    "analyze_wildcard": true
+                  }
+                }
+              },
+              "*FATAL": {
+                "query": {
+                  "query_string": {
+                    "query": "*FATAL",
+                    "analyze_wildcard": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+ 
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "query_string": {
+          "query": "*WARNING OR ERROR",
+          "analyze_wildcard": true
+        }
+      },
+      "filter": {
+        "bool": {
+          "must": [
+            {
+              "query": {
+                "query_string": {
+                  "query": "*",
+                  "analyze_wildcard": true
+                }
+              }
+            },
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": 1437642835671,
+                  "lte": 1437644635671
+                }
+              }
+            }
+          ],
+          "must_not": []
+        }
+      }
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "2": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "interval": "30s",
+        "pre_zone": "+03:00",
+        "pre_zone_adjust_large_interval": true,
+        "min_doc_count": 1,
+        "extended_bounds": {
+          "min": 1437642835665,
+          "max": 1437644635665
+        }
+      },
+      "aggs": {
+        "3": {
+          "filters": {
+            "filters": {
+              "*termi8": {
+                "query": {
+                  "query_string": {
+                    "query": "*termi8",
+                    "analyze_wildcard": true
+                  }
+                }
+              },
+              "*termi9": {
+                "query": {
+                  "query_string": {
+                    "query": "*termi9",
+                    "analyze_wildcard": true
+                  }
+                }
+              },
+              "*termi10": {
+                "query": {
+                  "query_string": {
+                    "query": "*termi10",
+                    "analyze_wildcard": true
+                  }
+                }
+              },
+              "*termi7": {
+                "query": {
+                  "query_string": {
+                    "query": "*termi7",
+                    "analyze_wildcard": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

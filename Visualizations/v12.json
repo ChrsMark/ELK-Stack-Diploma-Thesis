@@ -1,0 +1,69 @@
+ 
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "query_string": {
+          "query": "*VCPUS",
+          "analyze_wildcard": true
+        }
+      },
+      "filter": {
+        "bool": {
+          "must": [
+            {
+              "query": {
+                "query_string": {
+                  "query": "*",
+                  "analyze_wildcard": true
+                }
+              }
+            },
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": 1437642835671,
+                  "lte": 1437644635671
+                }
+              }
+            }
+          ],
+          "must_not": []
+        }
+      }
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "2": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "interval": "30s",
+        "pre_zone": "+03:00",
+        "pre_zone_adjust_large_interval": true,
+        "min_doc_count": 1,
+        "extended_bounds": {
+          "min": 1437642835662,
+          "max": 1437644635662
+        }
+      },
+      "aggs": {
+        "1": {
+          "avg": {
+            "field": "freesize"
+          }
+        },
+        "3": {
+          "min": {
+            "field": "freesize"
+          }
+        },
+        "4": {
+          "max": {
+            "field": "freesize"
+          }
+        }
+      }
+    }
+  }
+}
